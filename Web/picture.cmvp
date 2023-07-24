@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+@if?!Authenticate@ Not authenticated @else@
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<html>
+<head>
+	<META CHARSET="utf-8"/>
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Sancara</title>
+	<script language=JavaScript>
+	<!--
+		function Clicked(action,func)
+		{
+			document.RESOURCES.action=action;
+			document.RESOURCES.FUNCTION.value=func;
+			document.RESOURCES.submit();
+		}
+		
+		function Clicked2(action,func)
+		{
+			document.UPLOAD.action=action;
+			document.UPLOAD.FUNCTION.value=func;
+			document.UPLOAD.submit();
+		}
+	//-->
+	</script>
+</head>
+
+<body>
+<div id="header">
+
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div class="top-nav">
+		<a href="index.cmvp">Home</a>
+		<a href="about.cmvp">About</a>
+		<a href="features.cmvp">Features</a>
+			  <div class="dropdown">
+				  <button class="dropbtn" onclick="myFunction()">Maps
+				    <i class="fa fa-caret-down"></i>
+				  </button>
+
+				  <div class="dropdown-content" id="map-list">
+				    <a href="world-map.cmvp">World Map</a>
+				    <a href="malessor-maps.cmvp">Malessor Maps</a>
+				    <a href="adran-maps.cmvp">Adran Maps</a>
+				    <a href="engor-maps.cmvp">Engor Maps</a>
+				  </div>
+
+			  </div>
+		<a href="scripts.cmvp">Scripts</a>
+		<a href="topplayers.cmvp">Leaderboards</a>
+			<div class="topnav-right">
+				<a href="access.cmvp">Login</a>
+				<a href="register.cmvp">Register</a>
+			</div>
+	</div>
+
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="access.cmvp">Player Portal</a></li>
+			<li><a href="areas.cmvp">Areas</a></li>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+
+		<FORM  ACCEPT-CHARSET="UTF-8" NAME=RESOURCES TARGET=_top METHOD=POST ACTION="picture.cmvp" width=80%>
+			<INPUT TYPE=HIDDEN NAME=AUTH VALUE="@Authenticate?AUTH@">
+			<INPUT TYPE=HIDDEN NAME=FUNCTION VALUE="">
+			@if?CheckReqParm?PLAYER=@
+				<INPUT TYPE=HIDDEN NAME=AUTHPLAYER VALUE="@Authenticate?SETPLAYER@">
+			@endif@
+			@if?IsAccountSystem@
+				<INPUT TYPE=HIDDEN NAME=AUTHACCOUNT VALUE="@Authenticate?SETACCOUNT@">
+				<CENTER> Character:
+				@AddRequestParameter?OLDPLAYER=@@RequestParameter?PLAYER@@ @
+				<SELECT NAME=PLAYER ONCHANGE="Clicked('picture.cmvp');">
+					@AccountPlayerNext?RESET@
+					@loop@
+					@AccountPlayerNext@
+					<OPTION VALUE="@RequestParameter?PLAYER@"  @if?CheckReqParm?PLAYER=@@RequestParameter?OLDPLAYER@@ @SELECTED@endif@ >@RequestParameter?PLAYER@
+					@back@
+				</SELECT>
+					@AddRequestParameter?PLAYER=@@RequestParameter?OLDPLAYER@@ @
+			@else@
+				<INPUT TYPE=HIDDEN NAME=PLAYER VALUE="@PlayerData?NAME@">
+			@endif@
+		</FORM>
+
+		<CENTER>
+			@if?CheckReqParm?FUNCTION=NEWIMAGE@
+				<FONT COLOR=RED><B>@PlayerOnline?NEWIMAGE@</B></FONT><P> 
+			@endif@ 
+		<TR>
+		<br>Name: <FONT COLOR=BLUE><B>@PlayerData?NAME@</B></FONT>@if?PlayerOnline?=true@<FONT COLOR=RED>&nbsp;&nbsp;&nbsp; *ONLINE*</FONT>@endif@
+		<BR>
+		Race: <FONT COLOR=BLUE>@PlayerData?GENDERNAME@ @PlayerData?RACENAME@</FONT>
+		<BR>
+		<B>Your Current Portrait:</B><BR><br>
+			@if?PlayerData?HASIMG@
+				<IMG HEIGHT=140 WIDTH=70 SRC="@PlayerData?IMGURL@">
+			@endif@
+		<BR CLEAR=RIGHT>
+		<BR CLEAR=LEFT>
+		<br>
+			<div id="profile-image-text">
+				<B>All images are automatically sized to 140x70 or 10x10.</B><BR>
+				<B>Images may be in JPEG, GIF, or BMP format, but no images over 50 kilobytes will be accepted.</B><BR>
+			</div>
+		<br>
+		<FORM  ACCEPT-CHARSET="UTF-8" NAME=UPLOAD TARGET=_top ENCTYPE="multipart/form-data" ACTION=picture.cmvp METHOD=POST>
+		<INPUT TYPE=HIDDEN NAME=AUTH VALUE="@Authenticate?AUTH@">
+			@if?CheckReqParm?PLAYER=@
+				<INPUT TYPE=HIDDEN NAME=AUTHPLAYER VALUE="@Authenticate?SETPLAYER@">
+			@endif@
+		<INPUT TYPE=HIDDEN NAME=PLAYER VALUE="@PlayerData?NAME@">
+		<INPUT TYPE=HIDDEN NAME=PATH VALUE="">
+		<INPUT TYPE=HIDDEN NAME=FUNCTION VALUE="">
+		<INPUT TYPE=FILE NAME=FILE>
+			<TABLE WIDTH=100% BORDER=0>
+				<TD WIDTH=20% ALIGN=CENTER><BR><br><br><br></TD>
+				<TD WIDTH=20% ALIGN=CENTER>
+				<INPUT TYPE=SUBMIT NAME=UPLOAD VALUE="Upload New" ONCLICK="Clicked2('picture.cmvp','NEWIMAGE');">
+				<br><br></TD>
+				<TD WIDTH=20% ALIGN=CENTER><BR></TD>
+				<TD WIDTH=20% ALIGN=CENTER>
+				<INPUT TYPE=BUTTON NAME=BACK VALUE="Back" ONCLICK="Clicked('access.cmvp','');">
+				</TD>
+				<TD WIDTH=20% ALIGN=CENTER><BR></TD>
+				</TR>
+			</TABLE>
+		</FORM>
+	
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+</body>
+</html>
+@endif@

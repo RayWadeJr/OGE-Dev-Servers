@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<META CHARSET="utf-8"/>
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css?id=2">
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Sancara</title>
+	<script>
+	function toggleDarkmode() {
+	var document_body = document.body;
+	document_body.classList.toggle("darkmode");
+	}
+
+	</script>
+
+</head>
+
+<body>
+<div id="header">
+
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div class="top-nav">
+		<a class="active" href="index.cmvp">Home</a>
+		<a href="about.cmvp">About</a>
+		<a href="features.cmvp">Features</a>
+			<div class="dropdown">
+				<button class="dropbtn">Maps
+				    <i class="fa fa-caret-down"></i>
+				</button>
+
+				<div class="dropdown-content" id="map-list">
+				    <a href="world-map.cmvp">World Map</a>
+				    <a href="malessor-maps.cmvp">Malessor Maps</a>
+				    <a href="adran-maps.cmvp">Adran Maps</a>
+				    <a href="engor-maps.cmvp">Engor Maps</a>
+				</div>
+
+			  </div>
+		<a href="scripts.cmvp">Scripts</a>
+		<a href="topplayers.cmvp">Leaderboards</a>
+			<div class="topnav-right">
+				<a href="access.cmvp">Login</a>
+				<a href="register.cmvp">Register</a>
+			</div>
+	</div>
+
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="areas.cmvp">Areas</a></li>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			<li><a href="soundpack.zip">Soundpack</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+		<P align=center><FONT size=5><STRONG>What is a
+		MUD?</STRONG></FONT></P>
+		<P align=left>MUD stands for "Multi-User Dungeon", and refers to a text-based
+		multi-user game centered around a fantasy adventure genre such as Dungeons and
+		Dragons.&nbsp; </P>
+		<P align=left>In a typical MUD, a person would connect to a MUD Server using a
+		Telnet client (such as windows Telnet) or a MUD client (which is usually just a
+		fancy telnet program).&nbsp; </P>
+		<P align=left>That person would then create a character.&nbsp; A character is an
+		adventuring person whose role you would take on whenever you log into the
+		MUD.&nbsp; A character&nbsp;may be a sword swinging Fighter, a sneaky Thief, a
+		spell casting Mage, a powerful Cleric, or even a singing Bard.&nbsp; Your
+		character can also be of many different races, including Elf, Gnome, Dwarf,
+		Human, Halfling, and sometimes many others.</P>
+		<P align=left>Once a person has a character in a MUD, they may take that
+		character on wondrous adventures.&nbsp; A character may explore vast caverns,
+		fight numerous monsters, uncover fabulous treasures, solve <SPAN
+		style="FONT-SIZE: 12pt; FONT-FAMILY: 'Times New Roman'; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">intriguing
+		</SPAN>puzzles, and avoid numerous traps.&nbsp; </P>
+		<P align=left>The object, however, is always the same: to advance the character
+		in Experience.&nbsp; As a character advances in Experience,&nbsp;he or
+		she&nbsp;also gains new powers and capabilities, allowing the character to take
+		on even more difficult monsters and explore more dangerous places, with even
+		greater reward.</P>
+		<P align=left><STRONG>A Mud is Text Based</STRONG></P>
+		<P align=left>In this world of computer games with amazing graphical
+		capabilities, why would anyone play a text based game?&nbsp; Another question
+		might be:&nbsp; If we have television, why bother reading books?&nbsp; The
+		answer is the same.&nbsp; Our imagination still provides greater inspiration
+		than any high resolution computer game, or any television show can mimic.</P>
+		<P align=left>MUDs can be extremely well written at times, providing descriptive
+		places and monsters that interact with you at a level of complexity unmatched in
+		the best computer game.&nbsp; Also, since your interaction is
+		through&nbsp;english word&nbsp;commands, your ability to interact with the world
+		is also greatly enhanced.&nbsp; In fact, interaction can be so complex and
+		realistic that many people play MUDs just for that social interaction, <SPAN
+		style="FONT-SIZE: 12pt; FONT-FAMILY: 'Times New Roman'; mso-fareast-font-family: 'Times New Roman'; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">foregoing
+		</SPAN>the greater aim of advancing a character.</P>
+		<P align=left>In conclusion, it should be pointed out that a MUD can be the most
+		addictive, rewarding leisure experience of your life, if you give it a
+		chance.&nbsp; There are also numerous web sites and hundreds if not thousands of
+		MUDs to play, each with their own special characteristics and twists to enhance
+		the experience for all concerned.</P>
+		<P align=left>&nbsp;</P>
+
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+	<button id="dark-mode-btn" class="toggle" onclick="toggleDarkmode()">dark mode</button>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<META CHARSET="utf-8"/>
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css">
+	<title>Sancara</title>
+		<script language="JavaScript">
+	<!--
+		function Trash(ch,tm)
+		{
+			if(window.confirm('Delete message?'))
+			{
+				var strFeatures="top=0,left=0,resizeable=no,scrollbars=no,height=0,width=0,alwaysRaised=yes,dependent=yes";
+				w=window.open("channeldo.cmvp?AUTH=@Authenticate?AUTH@&CHANNEL="+ch+"&TIME="+tm,"Ability",strFeatures, false);
+			}
+		}
+	//-->
+	</script>
+</head>
+
+<body>
+<div id="header">
+
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div id="main-menu">
+		<ul class="topnav">
+		<li><a class="active" href="index.cmvp">Home</a></li>
+		<li><a href="about.cmvp">About</a></li>
+		<li><a href="features.cmvp">Features</a></li>
+		<li><a href="scripts.cmvp">Scripts</a></li>
+		<li><a href="maps.cmvp">Maps</a></li>
+		<li><a href="topplayers.cmvp">Leaderboards</a></li>
+
+		<li class="right"><a href="access.cmvp">Login</a></li> 
+		<li class="right"><a href="register.cmvp">Register</a></li>
+		</ul>
+	</div>
+
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="access.cmvp">Player Portal</a></li>
+			<li><a href="areas.cmvp">Areas</a></li>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+<CENTER>
+	<h2>Sancara Channel Backlogs</H2>
+	<br>
+	<a href="/access.cmvp?@RequestParametersEncoded@"><FONT COLOR=BLUE>Back to the access menu</FONT></A><br>
+	<br>
+</CENTER>
+	@if?!Authenticate@ 
+		You are not authenticated.
+	@else@
+	<TABLE WIDTH=100% BORDER=1>
+	<TR><TD WIDTH=25% COLSPAN=4 BGCOLOR=#90ee90 ALIGN=CENTER><H3>Available Channels</H32></TD></TR>
+		@AddRequestParameter?CHANNELBACK=@@RequestParameter?CHANNEL@@ @
+			@ChannelNext?RESET@
+			@loop@
+			@ChannelNext@
+			<TR>
+			<TD WIDTH=25%> @if?!CheckReqParm?CHANNEL=@<a href="channels.cmvp?@RequestParametersEncoded@&CHANNELBACKLOGPAGE=0">@RequestParameter?CHANNEL@</a>@endif@<BR></TD>
+			<TD WIDTH=25%> @ChannelNext?EMPTYOK@ @if?!CheckReqParm?CHANNEL=@<a href="channels.cmvp?@RequestParametersEncoded@&CHANNELBACKLOGPAGE=0">@RequestParameter?CHANNEL@</a>@endif@<BR></TD>
+			<TD WIDTH=25%> @ChannelNext?EMPTYOK@ @if?!CheckReqParm?CHANNEL=@<a href="channels.cmvp?@RequestParametersEncoded@&CHANNELBACKLOGPAGE=0">@RequestParameter?CHANNEL@</a>@endif@<BR></TD>
+			<TD WIDTH=25%> @ChannelNext?EMPTYOK@ @if?!CheckReqParm?CHANNEL=@<a href="channels.cmvp?@RequestParametersEncoded@&CHANNELBACKLOGPAGE=0">@RequestParameter?CHANNEL@</a>@endif@<BR></TD>
+			</TR>
+			@back@
+	</TABLE>
+		<P>
+		</CENTER>
+		@AddRequestParameter?CHANNEL=@@RequestParameter?CHANNELBACK@@ @
+		@AddRequestParameter?CHANNELBACKLOGPAGESIZE=10@
+		<INPUT TYPE=HIDDEN NAME=CHANNELBACKLOGPAGE VALUE="@RequestParameter?CHANNELBACKLOGPAGE@">
+		<P>
+		@if?!CheckReqParm?CHANNEL=@
+		<B>Back logs for @RequestParameter?CHANNEL@</B><BR>
+			@ChannelBackLogNext?RESET@
+			@loop@
+			@ChannelBackLogNext@<P>
+			@back@
+			<TABLE WIDTH=100% BORDER=0>
+			<TR>
+				<TD WIDTH=20%>
+					@if?!CheckReqParm?CHANNELBACKLOGPAGE=&||CHANNELBACKLOGPAGE=0@
+						@AddRequestParameter?CHANNELBACKLOGPAGE=--@
+						<a href="channels.cmvp?CHANNELBACKLOGPAGE=@RequestParameter?CHANNELBACKLOGPAGE@&@RequestParametersEncoded@">Prev Page</a>
+						@AddRequestParameter?CHANNELBACKLOGPAGE=++@
+					@endif@
+				</TD>
+				<TD>
+					@if?CheckReqParm?CHANNELBACKLOGNEXTPAGE=true@
+						@AddRequestParameter?CHANNELBACKLOGPAGE=++@
+						<a href="channels.cmvp?CHANNELBACKLOGPAGE=@RequestParameter?CHANNELBACKLOGPAGE@&@RequestParametersEncoded@">Next Page</a>
+					@endif@
+				</TD>
+			</TR>
+			</TABLE>
+		@endif@
+	@endif@
+	
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+</body>
+</html>

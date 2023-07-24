@@ -1,0 +1,55 @@
+time_prog 0
+mpechoat "Malessor" ^WYou hear a bell toll the first hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=1)
+mpechoat "Malessor"
+~
+
+time_prog 1
+mpechoat "Malessor" ^WYou hear a bell toll the second hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=2)
+mpechoat "Malessor"
+~
+
+time_prog 2
+mpechoat "Malessor" ^WYou hear a bell toll the third hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=3)
+mpechoat "Malessor"
+~
+
+time_prog 3
+mpechoat "Malessor" ^WYou hear a bell toll the fourth hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=4)
+mpechoat "Malessor"
+~
+
+time_prog 4
+mpechoat "Malessor" ^WYou hear a bell toll the fifth hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=5)
+mpechoat "Malessor"
+~
+
+time_prog 5
+mpechoat "Malessor" ^WYou hear a bell toll the sixth hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=6)
+mpechoat "Malessor"
+~
+
+time_prog 6
+mpechoat "Malessor" ^WYou hear a bell toll the seventh hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=7)
+mpechoat "Malessor"
+~
+
+time_prog 7
+mpechoat "Malessor" ^WYou hear a bell toll the eigth hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=8)
+mpechoat "Malessor"
+~
+
+GREET_PROG 100
+if inroom($n == Malessor#0) and ispc($n)
+mpechoat $n Some music can be heard as $n enters the room
+mpechoat $n !!MUSIC(elwynn_forest.mp3 v=30 p=100 L=0 C=1 T=music)
+else
+endif
+~
+
+GREET_PROG 100
+if race($n == Essence) or class($n == Entity)
+	mpechoat $n You have not completed the test of creation and must return to the void.
+	mptransfer $n The Void#2
+else
+endif
+~

@@ -1,0 +1,181 @@
+load=scripts/Zetzer/ZetzerBless.script~
+load=scripts/Jukebox.script~
+
+
+#########################################
+######## Bless when looked at ##########
+########################################
+
+CNCLMSG_PROG LOOK Zetzer Zetze Zetz Zet Ze Z
+if isname($n Xalan) 
+mpechoat $n ^rStop lookin at me^?
+return cancel
+else
+if affected($n, Prayer_Bless)
+mpechoat $n You are already blessed.
+else
+MPCALLFUNC Bless
+endif
+endif
+~
+
+FUNCTION_PROG Bless
+mpechoaround $n $n takes a glance at Zetzer.
+mpechoat $i $n looks at you for your blessing.
+mpechoat $n ^wYou look at Zetzer and are almost blinded. Shining light eminates from all around her and a calming wind blows through your body. Zetzer stands before you in one of her chosen shapes, and bows her head to you.
+mpaffect bless $n
+mpechoat $n You feel blessed
+RETURN CANCEL
+~
+
+
+
+########################################################
+################# Player Updates #######################
+########################################################
+
+
+
+###############################################################
+####    Powerful Beefup Command to Enchant a Character     ####
+###############################################################
+## 				Calls Zetzer/ZetzerBless.script				 ##
+## 				Bless command or when looked at				 ##
+###############################################################
+
+CNCLMSG_PROG LOOK Zetzer Zetze Zetz Zet Ze Z
+		mpcallfunc LookZetzerBless
+	return cancel
+~
+
+CNCLMSG_PROG HUH Beefup
+		mplog INFO $i CNCLMSG/Beefup $g.2 $n/exam.script
+	if isname($n Zetzer)
+		mpargset $9 $g.2
+		mpcallfunc BeefUpSpell
+	else
+	endif
+	return cancel
+~
+
+CNCLMSG_PROG HUH Bless
+		mplog INFO $i CNCLMSG/Bless $g.2 $n/exam.script
+	if isname($n Zetzer)
+		mpargset $9 $g.2
+		mpcallfunc CastBlessSpell
+	else
+	endif
+	return cancel
+~
+
+EXECMSG_PROG CAST_SPELL bless
+		mplog INFO $i Cast/Bless $g.2 $n/exam.script
+	if isname($n Zetzer)
+		mpgset $i MANA 100000000
+	else
+	endif
+~
+
+CNCLMSG_PROG HUH TimeWarp
+		mplog INFO $i CNCLMSG/Timewarp $n/exam.script
+	if isname($i $n)
+		mpechoat world !!MUSIC(test.mp3 v=30 p=100 L=0 C=1 T=music) TimeWarp
+		mpechoat world It's just a jump to the left . . . . and then a step to the riiighiighhiighhtt!
+	else
+	endif
+	return cancel
+~
+###########################################
+####          Sancara Jukebox          ####
+###########################################
+
+CNCLMSG_PROG HUH Jukebox
+		mplog INFO $i CNCLMSG/Jukebox $g.2 $nMain.script
+if isname($i $n)
+	mpcallfunc SongList
+		if eval($g.2 == 1)
+			mpcallfunc PickSongOne
+			mpcallfunc PlaySong
+		else
+			if eval($g.2 == 2)
+				mpcallfunc PickSongTwo
+				mpcallfunc PlaySong
+			else
+				if eval($g.2 == 3)
+					mpcallfunc PickSongThree
+					mpcallfunc PlaySong
+				else
+					if eval($g.2 == 4)
+						mpcallfunc PickSongFour
+						mpcallfunc PlaySong
+					else
+						if eval($g.2 == 5)
+							mpcallfunc PickSongFive
+							mpcallfunc PlaySong
+						else
+							if eval($g.2 == 6)
+								mpcallfunc PickSongSix
+								mpcallfunc PlaySong
+							else
+								if eval($g.2 == 7)
+									mpcallfunc PickSongSeven
+									mpcallfunc PlaySong
+								else
+									if eval($g.2 == 8)
+										mpcallfunc PickSongEight
+										mpcallfunc PlaySong
+									else
+										if eval($g.2 == 9)
+											mpcallfunc PickSongNine
+											mpcallfunc PlaySong
+										else
+											if eval($g.2 == 10)
+												mpcallfunc PickSongTen
+												mpcallfunc PlaySong
+											else
+												if eval($g.2 == 11)
+													mpcallfunc PickSongEleven
+													mpcallfunc PlaySong
+												else
+													if eval($g.2 == 12)
+														mpcallfunc PickSongTwelve
+														mpcallfunc PlaySong
+													else
+														if eval($g.2 == 13)
+															mpcallfunc PickSongThirteen
+															mpcallfunc PlaySong
+														else
+															if eval($g.2 == 14)
+																mpcallfunc PickSongFourteen
+																mpcallfunc PlaySong
+															else
+																if eval($g.2 == 15)
+																	mpcallfunc PickSongFifteen
+																	mpcallfunc PlaySong
+																else
+																	if eval($g.2 == off)
+																		mpcallfunc SongStop
+																	else
+																		mpcallfunc JukeboxMenu
+																	endif
+																endif
+															endif
+														endif
+													endif
+												endif
+											endif
+										endif
+									endif
+								endif
+							endif
+						endif
+					endif
+				endif
+			endif
+		endif
+else
+endif
+	return cancel
+~
+
+

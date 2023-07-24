@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<META CHARSET="utf-8"/>
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Sancara</title>
+
+		<script language=JavaScript>
+	<!--
+		function Clicked(action)
+		{
+			document.ACCESS.action=action;
+			document.ACCESS.submit();
+		}
+		function Register()
+		{
+			document.ACCESS.LASTPAGE.value='access.cmvp';
+			Clicked('register.cmvp');
+		}
+		function Back()
+		{
+			Clicked('@RequestParameter?LASTPAGE@');
+		}
+	//-->
+	</SCRIPT>
+</head>
+
+<body>
+<div id="header">
+	
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div class="top-nav">
+		<a href="index.cmvp">Home</a>
+		<a href="about.cmvp">About</a>
+		<a href="features.cmvp">Features</a>
+			  <div class="dropdown">
+				  <button class="dropbtn" onclick="myFunction()">Maps
+				    <i class="fa fa-caret-down"></i>
+				  </button>
+
+				  <div class="dropdown-content" id="map-list">
+				    <a href="world-map.cmvp">World Map</a>
+				    <a href="malessor-maps.cmvp">Malessor Maps</a>
+				    <a href="adran-maps.cmvp">Adran Maps</a>
+				    <a href="engor-maps.cmvp">Engor Maps</a>
+				  </div>
+
+			  </div>
+		<a href="scripts.cmvp">Scripts</a>
+		<a href="topplayers.cmvp">Leaderboards</a>
+			<div class="topnav-right">
+				<a href="access.cmvp">Login</a>
+				<a class="active" href="register.cmvp">Register</a>
+			</div>
+	</div>
+
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="areas.cmvp">Areas</a></li>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+
+<CENTER>
+	<h2>Player Account Creation</H2>
+	<br>
+	<FORM  ACCEPT-CHARSET="UTF-8" NAME=LOGIN METHOD=POST ACTION=register.cmvp TARGET=_top>
+	<INPUT TYPE=HIDDEN NAME=LASTPAGE VALUE="@RequestParameter?LASTPAGE@">
+	<INPUT TYPE=HIDDEN NAME=AUTH VALUE="@RequestParameter?AUTH@">
+	<INPUT TYPE=HIDDEN NAME=ACTION VALUE="REGISTER">
+	@if?CheckReqParm?ACTION=REGISTER@
+	<FONT COLOR=RED SIZE=5><B>
+	<SCRIPT LANGUAGE=JavaScript>
+	<!--
+		var errorCode='@AccountCreate?CREATE&LOGIN@';
+		if(errorCode=='')
+		{
+		    var lp='@RequestParameter?LASTPAGE@';
+		    var x=lp.indexOf('AUTH=');
+		    if(x<0) x=lp.indexOf('auth=');
+		    if(x>=0)
+		       lp=lp.substr(0,x)+'FAKE'+lp.substr(x);
+		    if(lp.indexOf('?')<0)
+		      lp=lp+'?';
+		    else
+		      lp=lp+'&';
+			var newloc=lp+'AUTH=@RequestParameter?AUTH@';
+			Clicked(newloc);
+		}
+		else
+		{
+			if(errorCode=='NO_NAME')
+				document.write('You need to specify a valid account name.');
+			else
+			if(errorCode=='NO_PASSWORD')
+				document.write('You need to specify a password.');
+			else
+			if((errorCode=='NO_PASSWORDAGAIN')
+			||(errorCode=='BAD_PASSWORDMATCH'))
+				document.write('Your password entries don\'t match. Please re-enter your password.');
+			else
+			if((errorCode=='NO_VERIFY')||(errorCode=='NO_VERIFYKEY')||(errorCode=='BAD_VERIFY'))
+				document.write('You need to enter the characters in the image.  Case is not sensitive.');
+			else
+			if(errorCode=='BAD_EMAILADDRESS')
+				document.write('The email address you entered is not valid.');
+			else
+			if(errorCode=='BAD_USED_NAME')
+				document.write('The account name you entered is invalid, or in use by someone else.  Please enter another (no spaces or special characters allowed!');
+			else
+			if((errorCode=='NO_NEW_PLAYERS')||(errorCode=='NO_NEW_LOGINS')||(errorCode=='CREATE_LIMIT_REACHED'))
+			{
+				document.write('This system is not accepting new accounts at this time.  Please try again later.');
+				if(window.setTimeout)
+                    window.setTimeout(Back,1000);
+                else
+                    Back();
+			}
+			else
+				document.write(errorCode);
+		}
+	//-->
+	</SCRIPT>
+	</FONT></B><P>
+	@endif@
+	Please create your new @MudInfo?NAME@ account here.<BR>
+	If you already have a player account, click <a href="access.cmvp">here</a> to login.
+	<P>
+	<TABLE WIDTH=400 BORDER=1>
+	<TR><TD WIDTH=400 COLSPAN=2 ALIGN=CENTER BGCOLOR=WHITE><FONT COLOR=BLACK><B>Create New Account</B></FONT></TD></TR>
+	<TR><TD WIDTH=100><FONT COLOR=BLACK>Account Name:</FONT></TD><TD><INPUT TYPE=TEXT SIZE=10 ID=LOGIN NAME=LOGIN VALUE="@RequestParameter?LOGIN@"></TD></TR>
+	@if?AccountCreate?SHOWPASSWORD@
+		<TR><TD><FONT COLOR=BLACK>Password:</FONT></TD><TD><INPUT TYPE=PASSWORD SIZE=15 ID=PASSWORD NAME=PASSWORD VALUE="@RequestParameter?PASSWORD@"></TD></TR>
+		<TR><TD><FONT COLOR=BLACK>Password Again:</FONT></TD><TD><INPUT TYPE=PASSWORD SIZE=15 ID=PASSWORDAGAIN NAME=PASSWORDAGAIN></TD></TR>
+	@endif@
+	@if?AccountCreate?SHOWEMAILADDRESS@
+		<TR><TD WIDTH=100><FONT COLOR=BLACK>Email Address:</FONT></TD><TD><INPUT TYPE=TEXT SIZE=20 ID=EMAILADDRESS NAME=EMAILADDRESS VALUE="@RequestParameter?EMAILADDRESS@"></TD></TR>
+	@endif@
+	<TR><TD><IMG SRC="/ImageVerificationImage?IMAGE"></TD>
+		<TD><INPUT TYPE=HIDDEN SIZE=15 NAME=IMGVERKEY VALUE="@ImageVerificationImage@"><INPUT TYPE=TEXT SIZE=15 ID=VERIFY NAME=VERIFY></TD>
+	</TR>
+	<TR><TD COLSPAN=2 ALIGN=CENTER>
+		<INPUT TYPE=SUBMIT NAME=LOGINBUTTON VALUE=Create>
+		<INPUT TYPE=BUTTON NAME=BACKBUTTON VALUE=Cancel ONCLICK="Back();">
+	</TD></TR>
+	</TABLE>
+	</CENTER>
+	</FORM>
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+</body>
+</html>

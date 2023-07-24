@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<META CHARSET="utf-8"/>
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Sancara</title>
+	<SCRIPT LANGUAGE=JavaScript>
+	<!--
+	function openUp(named)
+	{
+		var strFeatures="top=200,left=50,resizeable=no,scrollbars=yes,height=400,width=650,alwaysRaised=yes,dependent=yes";
+		w=window.open("help.cmvp?HELPTOPIC="+named,
+		            "Help",strFeatures, false);
+	}
+	//-->
+	</SCRIPT>
+
+	
+</head>
+
+<body>
+<div id="header">
+	
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div class="top-nav">
+		<a href="index.cmvp">Home</a>
+		<a href="about.cmvp">About</a>
+		<a href="features.cmvp">Features</a>
+			  <div class="dropdown">
+				  <button class="dropbtn" onclick="myFunction()">Maps
+				    <i class="fa fa-caret-down"></i>
+				  </button>
+
+				  <div class="dropdown-content" id="map-list">
+				    <a href="world-map.cmvp">World Map</a>
+				    <a href="malessor-maps.cmvp">Malessor Maps</a>
+				    <a href="adran-maps.cmvp">Adran Maps</a>
+				    <a href="engor-maps.cmvp">Engor Maps</a>
+				  </div>
+
+			  </div>
+		<a href="scripts.cmvp">Scripts</a>
+		<a href="topplayers.cmvp">Leaderboards</a>
+			<div class="topnav-right">
+				<a href="access.cmvp">Login</a>
+				<a href="register.cmvp">Register</a>
+			</div>
+	</div>
+
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="areas.cmvp">Areas</a></li>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+	<br>
+		@HelpTopics?reset@
+		@loop@
+			@HelpTopics?NEXTLETTER@
+			<a href="helps.cmvp?FIRSTLETTER=@RequestParameter?HELPFIRSTLETTER@">
+			@RequestParameter?HELPFIRSTLETTER@
+			</a>
+		@back@
+		<P>
+		<TABLE class="top-table">
+		<TR><TD WIDTH=25% COLSPAN=4 BGCOLOR=#FCF5E5 ALIGN=CENTER><H2>Sancara Help Topics</H2></TD></TR>
+		@HelpTopics?reset@
+		@loop@
+		<TR>
+		@HelpTopics?NEXT&SHORT@<TD WIDTH=25%><a href="javascript:openUp('@HelpTopics@');"><B>@HelpTopics@</B></a></TD>
+		@HelpTopics?NEXT&SHORT&EMPTYOK@<TD WIDTH=25%><a href="javascript:openUp('@HelpTopics@');"><B>@HelpTopics@</B></a></TD>
+		@HelpTopics?NEXT&SHORT&EMPTYOK@<TD WIDTH=25%><a href="javascript:openUp('@HelpTopics@');"><B>@HelpTopics@</B></a></TD>
+		@HelpTopics?NEXT&SHORT&EMPTYOK@<TD WIDTH=25%><a href="javascript:openUp('@HelpTopics@');"><B>@HelpTopics@</B></a></TD>
+		</TR>
+		@back@
+		</TABLE>
+
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+</body>
+</html>

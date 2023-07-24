@@ -1,0 +1,170 @@
+FUNCTION_PROG SongList
+	mpsetvar $i SONG_ONE_NAME 'Badmoon Rising'
+	mpsetvar $i SONG_ONE_FILE_NAME 'Badmoon.mp3'
+	mpsetvar $i SONG_ONE_ARTIST 'C.C.R.'
+	mpsetvar $i SONG_TWO_NAME 'Dancing Queen'
+	mpsetvar $i SONG_TWO_FILE_NAME 'ABBA.mp3'
+	mpsetvar $i SONG_TWO_ARTIST 'ABBA'
+	mpsetvar $i SONG_THREE_NAME 'Crazy Bitch'
+	mpsetvar $i SONG_THREE_FILE_NAME 'CrazyBitch.mp3'
+	mpsetvar $i SONG_THREE_ARTIST 'Buckcherry'
+	mpsetvar $i SONG_FOUR_NAME 'Blackmoon Dance'
+	mpsetvar $i SONG_FOUR_FILE_NAME 'BlackMoonDance.mp3'
+	mpsetvar $i SONG_FOUR_ARTIST 'Enigma'
+	mpsetvar $i SONG_FIVE_NAME 'Adran Theme'
+	mpsetvar $i SONG_FIVE_FILE_NAME 'adran.mp3'
+	mpsetvar $i SONG_FIVE_ARTIST 'Unknown'
+	mpsetvar $i SONG_SIX_NAME '60 Second Theater (Lord of the Rings)'
+	mpsetvar $i SONG_SIX_FILE_NAME 'Rings.mp3'
+	mpsetvar $i SONG_SIX_ARTIST 'Unknown'
+	mpsetvar $i SONG_SEVEN_NAME 'Bananaman'
+	mpsetvar $i SONG_SEVEN_FILE_NAME 'BM.mp3'
+	mpsetvar $i SONG_SEVEN_ARTIST 'Unknown'
+	mpsetvar $i SONG_EIGHT_NAME 'Banana,banana,banana'
+	mpsetvar $i SONG_EIGHT_FILE_NAME 'banana.mp3'
+	mpsetvar $i SONG_EIGHT_ARTIST 'Teamspeak'
+	mpsetvar $i SONG_NINE_NAME 'Only Time'
+	mpsetvar $i SONG_NINE_FILE_NAME 'Enya_Only_Time.mp3'
+	mpsetvar $i SONG_NINE_ARTIST 'Enya'
+	mpsetvar $i SONG_TEN_NAME 'House of the Rising Sun'
+	mpsetvar $i SONG_TEN_FILE_NAME 'House.mp3'
+	mpsetvar $i SONG_TEN_ARTIST 'The Animals'
+#################################################################
+	mpsetvar $i SONG_ELEVEN_NAME 'Beat It'
+	mpsetvar $i SONG_ELEVEN_FILE_NAME 'beat_it_2008.mp3'
+	mpsetvar $i SONG_ELEVEN_ARTIST 'Michael Jackson'
+	mpsetvar $i SONG_TWELVE_NAME 'Dark Times'
+	mpsetvar $i SONG_TWELVE_FILE_NAME 'Dark_Times.mp3'
+	mpsetvar $i SONG_TWELVE_ARTIST 'Kevin Macleod'
+	mpsetvar $i SONG_THIRTEEN_NAME 'Golf'
+	mpsetvar $i SONG_THIRTEEN_FILE_NAME 'Golf.mp3'
+	mpsetvar $i SONG_THIRTEEN_ARTIST 'Robin Williams'
+	mpsetvar $i SONG_FOURTEEN_NAME 'Duskwood'
+	mpsetvar $i SONG_FOURTEEN_FILE_NAME 'Duskwood.mp3'
+	mpsetvar $i SONG_FOURTEEN_ARTIST 'Jason Hayes'
+	mpsetvar $i SONG_FIFTEEN_NAME 'Mad World'
+	mpsetvar $i SONG_FIFTEEN_FILE_NAME 'MadWorld.mp3'
+	mpsetvar $i SONG_FIFTEEN_ARTIST 'Adam Lambert'
+~
+
+FUNCTION_PROG JukeboxMenu
+		mpechoat $i ^WWelcome to the Sancara Jukebox 
+		mpechoat $i ^y(You must have MSP enabled and using a MSP enabled client)
+		mpechoat $i
+		mpechoat $i ^W   1 ^c$%VAR($i SONG_ONE_NAME)%^N by ^c$%VAR($i SONG_ONE_ARTIST)% ^y - $%VAR($i SONG_ONE_COUNT)%^N
+		mpechoat $i ^W   2 ^c$%VAR($i SONG_TWO_NAME)%^N by ^c$%VAR($i SONG_TWO_ARTIST)% 
+		mpechoat $i ^W   3 ^c$%VAR($i SONG_THREE_NAME)%^N by ^c$%VAR($i SONG_THREE_ARTIST)% 
+		mpechoat $i ^W   4 ^c$%VAR($i SONG_FOUR_NAME)%^N by ^c$%VAR($i SONG_FOUR_ARTIST)% 
+		mpechoat $i ^W   5 ^c$%VAR($i SONG_FIVE_NAME)%^N by ^c$%VAR($i SONG_FIVE_ARTIST)% 
+		mpechoat $i ^W   6 ^c$%VAR($i SONG_SIX_NAME)%^N by ^c$%VAR($i SONG_SIX_ARTIST)% 
+		mpechoat $i ^W   7 ^c$%VAR($i SONG_SEVEN_NAME)%^N by ^c$%VAR($i SONG_SEVEN_ARTIST)% 
+		mpechoat $i ^W   8 ^c$%VAR($i SONG_EIGHT_NAME)%^N by ^c$%VAR($i SONG_EIGHT_ARTIST)% 
+		mpechoat $i ^W   9 ^c$%VAR($i SONG_NINE_NAME)%^N by ^c$%VAR($i SONG_NINE_ARTIST)% 
+		mpechoat $i ^W   10 ^c$%VAR($i SONG_TEN_NAME)%^N by ^c$%VAR($i SONG_TEN_ARTIST)% 
+		mpechoat $i ^W   11 ^c$%VAR($i SONG_ELEVEN_NAME)%^N by ^c$%VAR($i SONG_ELEVEN_ARTIST)% 
+		mpechoat $i ^W   12 ^c$%VAR($i SONG_TWELVE_NAME)%^N by ^c$%VAR($i SONG_TWELVE_ARTIST)% 
+		mpechoat $i ^W   13 ^c$%VAR($i SONG_THIRTEEN_NAME)%^N by ^c$%VAR($i SONG_THIRTEEN_ARTIST)% 
+		mpechoat $i ^W   14 ^c$%VAR($i SONG_FOURTEEN_NAME)%^N by ^c$%VAR($i SONG_FOURTEEN_ARTIST)% 
+		mpechoat $i ^W   15 ^c$%VAR($i SONG_FIFTEEN_NAME)%^N by ^c$%VAR($i SONG_FIFTEEN_ARTIST)% 
+		mpechoat $i
+		mpechoat $i ^WEnter ^c[Jukebox][Song Number] ^Wto play a song.^N
+~
+
+FUNCTION_PROG PlaySong
+	if class($i == Archon)
+		mpechoat $i ^rChanging song^? !!MUSIC(Off)
+		mpechoat world From out of nowhere you hear !!MUSIC($%VAR($i MP3_PLAYING)% v=50 p=100 L=0 C=1 T=music) ^c$%VAR($i NOW_PLAYING)%
+	else
+		mpechoat $i The sounds of !!MUSIC($%VAR($i MP3_PLAYING)% v=50 p=100 L=0 C=1 T=music) ^c$%VAR($i NOW_PLAYING)% fills the air.
+	endif
+~
+
+FUNCTION_PROG PickSongOne
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_ONE_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_ONE_NAME)% by $%VAR($i SONG_ONE_ARTIST)%
+	if var($i SONG_ONE_COUNT == '')
+		mpsetvar $i SONG_ONE_COUNT 1
+	else
+		mpsetvar $i SONG_ONE_COUNT ++
+	endif
+		mpechoat $n ^c$%VAR($i SONG_ONE_COUNT)%^N
+~
+
+FUNCTION_PROG PickSongTwo
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_TWO_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_TWO_NAME)% by $%VAR($i SONG_TWO_ARTIST)%
+~
+
+FUNCTION_PROG PickSongThree
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_THREE_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_THREE_NAME)% by $%VAR($i SONG_THREE_ARTIST)%
+~
+
+FUNCTION_PROG PickSongFour
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_FOUR_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_FOUR_NAME)% by $%VAR($i SONG_FOUR_ARTIST)%
+~
+
+FUNCTION_PROG PickSongFive
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_FIVE_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_FIVE_NAME)% by $%VAR($i SONG_FIVE_ARTIST)%
+~
+
+FUNCTION_PROG PickSongSix
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_SIX_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_SIX_NAME)% by $%VAR($i SONG_SIX_ARTIST)%
+~
+
+FUNCTION_PROG PickSongSeven
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_SEVEN_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_SEVEN_NAME)% by $%VAR($i SONG_SEVEN_ARTIST)%
+~
+
+FUNCTION_PROG PickSongEight
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_EIGHT_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_EIGHT_NAME)% by $%VAR($i SONG_EIGHT_ARTIST)%
+~
+
+FUNCTION_PROG PickSongNine
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_NINE_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_NINE_NAME)% by $%VAR($i SONG_NINE_ARTIST)%
+~
+
+FUNCTION_PROG PickSongTen
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_TEN_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_TEN_NAME)% by $%VAR($i SONG_TEN_ARTIST)%
+~
+
+FUNCTION_PROG PickSongEleven
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_ELEVEN_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_ELEVEN_NAME)% by $%VAR($i SONG_ELEVEN_ARTIST)%
+~
+
+FUNCTION_PROG PickSongTwelve
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_TWELVE_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_TWELVE_NAME)% by $%VAR($i SONG_TWELVE_ARTIST)%
+~
+
+FUNCTION_PROG PickSongThirteen
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_THIRTEEN_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_THIRTEEN_NAME)% by $%VAR($i SONG_THIRTEEN_ARTIST)%
+~
+
+FUNCTION_PROG PickSongFourteen
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_FOURTEEN_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_FOURTEEN_NAME)% by $%VAR($i SONG_FOURTEEN_ARTIST)%
+~
+
+FUNCTION_PROG PickSongFifteen
+	mpsetvar $i MP3_PLAYING $%VAR($i SONG_FIFTEEN_FILE_NAME)%
+	mpsetvar $i NOW_PLAYING $%VAR($i SONG_FIFTEEN_NAME)% by $%VAR($i SONG_FIFTEEN_ARTIST)%
+~
+
+
+FUNCTION_PROG PlayAll
+~
+
+FUNCTION_PROG SongStop
+		mpechoat world $i Stopped the Jukebox !!MUSIC(Off)
+
+~

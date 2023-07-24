@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<META CHARSET="utf-8"/>
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css">
+	<title>Sancara</title>
+</head>
+
+<body>
+<div id="header">
+
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div class="top-nav">
+		<a href="index.cmvp">Home</a>
+		<a href="about.cmvp">About</a>
+		<a href="features.cmvp">Features</a>
+			  <div class="dropdown">
+				  <button class="dropbtn" onclick="myFunction()">Maps
+				    <i class="fa fa-caret-down"></i>
+				  </button>
+
+				  <div class="dropdown-content" id="map-list">
+				    <a href="world-map.cmvp">World Map</a>
+				    <a href="malessor-maps.cmvp">Malessor Maps</a>
+				    <a href="adran-maps.cmvp">Adran Maps</a>
+				    <a href="engor-maps.cmvp">Engor Maps</a>
+				  </div>
+
+			  </div>
+		<a class="active" href="scripts.cmvp">Scripts</a>
+		<a href="topplayers.cmvp">Leaderboards</a>
+			<div class="topnav-right">
+				<a href="access.cmvp">Login</a>
+				<a href="register.cmvp">Register</a>
+			</div>
+	</div>
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+		<h1 class="no-bottom-margin">Malessor/Area.Script</h1>
+		<h2 class="no-margin">Author: Zetzer</h2>
+
+		<div id="star-rating">
+			<span class="fa fa-star checked"></span>
+			<span class="fa fa-star checked"></span>
+			<span class="fa fa-star checked"></span>
+			<span class="fa fa-star "></span>
+			<span class="fa fa-star "></span>
+		</div>
+
+		<p>You should be able to copy/paste all the text in the functions below without the html markup.</p>
+
+		<div class="function">
+
+			<h2 class="no-bottom-margin">####          Malessor Area Script          ####</h2>
+			<h3 class="no-top-margin">time_prog 0</h3>
+				<div class="tabbed">
+					mpechoat "Malessor" ^WYou hear a bell toll the first hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=1)<br>
+					mpechoat "Malessor"<br>
+				</div>
+			<h3 class="close-function">~</h3>
+		</div>
+
+	<div class="function">
+		<h3>time_prog 1</h3>
+			<div class="tabbed">
+			mpechoat "Malessor" ^WYou hear a bell toll the second hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=2)<br>
+			mpechoat "Malessor"<br>
+			</div>
+		<h3 class="close-function">~</h3>
+	</div>
+
+	<div class="function">
+		<h3>time_prog 2</h3>
+			<div class="tabbed">
+			mpechoat "Malessor" ^WYou hear a bell toll the third hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=3)<br>
+			mpechoat "Malessor"<br>
+			</div>
+		<h3 class="close-function">~</h3>
+	</div>
+
+	<div class="function">
+		<h3>time_prog 3</h3>
+			<div class="tabbed">
+			mpechoat "Malessor" ^WYou hear a bell toll the fourth hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=4)<br>
+			mpechoat "Malessor"<br>
+			</div>
+		<h3 class="close-function">~</h3>
+	</div>
+
+	<div class="function">
+		<h3>time_prog 4</h3>
+			<div class="tabbed">
+			mpechoat "Malessor" ^WYou hear a bell toll the fifth hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=5)<br>
+			mpechoat "Malessor"<br>
+			</div>
+		<h3 class="close-function">~</h3>
+	</div>
+
+	<div class="function">
+		<h3>time_prog 5</h3>
+			<div class="tabbed">
+			mpechoat "Malessor" ^WYou hear a bell toll the sixth hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=6)<br>
+			mpechoat "Malessor"<br>
+			</div>
+		<h3 class="close-function">~</h3>
+	</div>
+
+	<div class="function">
+		<h3>time_prog 6</h3>
+			<div class="tabbed">
+			mpechoat "Malessor" ^WYou hear a bell toll the seventh hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=7)<br>
+			mpechoat "Malessor"<br>
+			</div>
+		<h3 class="close-function">~</h3>
+	</div>
+
+	<div class="function">
+		<h3>time_prog 7</h3>
+			<div class="tabbed">
+			mpechoat "Malessor" ^WYou hear a bell toll the eigth hour from the center of Malessor^N !!SOUND(bell1.wav p=100 L=8)<br>
+			mpechoat "Malessor"<br>
+			</div>
+		<h3 class="close-function">~</h3>
+	</div>
+
+	<div class="function">
+		<h3>GREET_PROG 100</h3>
+			<div class="tabbed">
+			if inroom($n == Malessor#0)<br>
+				mpechoat $n Some music can be heard as $n enters the room<br>
+				mpechoat $n !!MUSIC(elwynn_forest.mp3 v=30 p=100 L=0 C=1 T=music)<br>
+			else<br>
+			endif<br>
+			</div>
+		<h3 class="close-function">~</h3>
+	</div>
+
+	<div class="function">
+		<h3>GREET_PROG 100</h3>
+			<div class="tabbed">
+			if race($n == Essence) or class($n == Entity)<br>
+				mpechoat $n You have not completed the test of creation and must return to the void.<br>
+				mptransfer $n The Void#2<br>
+			else<br>
+			endif<br>
+			</div>
+		<h3 class="close-function">~</h3>
+	</div>
+
+
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+</body>
+</html>

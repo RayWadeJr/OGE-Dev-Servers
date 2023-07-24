@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<META CHARSET="utf-8"/>
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Sancara</title>
+	<script language=JavaScript>
+	<!--
+		function openUp2(named)
+		{
+			var strFeatures="top=200,left=50,resizeable=no,scrollbars=yes,height=400,width=750,alwaysRaised=yes,dependent=yes";
+			w=window.open("ability.cmvp?ABILITY="+named,
+			            "Ability",strFeatures, false);
+		}
+	//-->
+	</script>
+</head>
+
+<body>
+<div id="header">
+	
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div class="top-nav">
+		<a href="index.cmvp">Home</a>
+		<a href="about.cmvp">About</a>
+		<a href="features.cmvp">Features</a>
+			  <div class="dropdown">
+				  <button class="dropbtn" onclick="myFunction()">Maps
+				    <i class="fa fa-caret-down"></i>
+				  </button>
+
+				  <div class="dropdown-content" id="map-list">
+				    <a href="world-map.cmvp">World Map</a>
+				    <a href="malessor-maps.cmvp">Malessor Maps</a>
+				    <a href="adran-maps.cmvp">Adran Maps</a>
+				    <a href="engor-maps.cmvp">Engor Maps</a>
+				  </div>
+
+			  </div>
+		<a href="scripts.cmvp">Scripts</a>
+		<a href="topplayers.cmvp">Leaderboards</a>
+			<div class="topnav-right">
+				<a href="access.cmvp">Login</a>
+				<a href="register.cmvp">Register</a>
+			</div>
+	</div>
+
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="areas.cmvp">Areas</a></li>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+		<h3>Deities Information</h3><P>
+		<UL>
+		@loop@
+		@DeityNext@
+		<LI><A href="#@RaceID@">@RaceName@</A>
+		@back@
+		</UL><P>
+		@DeityNext?reset@
+		@loop@
+		@DeityNext@
+		<TABLE WIDTH=100% BORDER=1>
+		<TR><TD WIDTH=100% COLSPAN=2 BGCOLOR=#FFCCFF ALIGN=CENTER><a name="@DeityID@"><H3>@DeityID@</H3></a></TD></TR>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Description</B></TD><TD>@DeityData?description@</TD>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Worshipper Requirements</B></TD><TD>@DeityData?worshipreq@</TD>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Cleric Requirements</B></TD><TD>@DeityData?clericreq@</TD>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Blessings</B></TD>
+		<TD>
+		@AbilityBlessingNext?reset@
+		@loop@
+		@AbilityBlessingNext@
+		<a href="javascript:openUp2('@AbilityID@');"><FONT COLOR=BLUE>@AbilityName@</FONT></a> <FONT COLOR=BLACK>/</FONT>
+		@back@
+		</TD>
+		</TR>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Worshipper Ritual</B></TD><TD>@DeityData?worshiptrig@&nbsp;</TD>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Cleric Ritual</B></TD><TD>@DeityData?clerictrig@&nbsp;</TD>
+		<!--
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Curses</B></TD>
+		<TD>
+		@AbilityCursesNext?reset@
+		@loop@
+		@AbilityCursesNext@
+		<a href="javascript:openUp2('@AbilityID@');"><FONT COLOR=RED>@AbilityName@</FONT></a> <FONT COLOR=BLACK>/</FONT>
+		@back@
+		&nbsp;</TD>
+		</TR>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Worshipper Sins</B></TD><TD>@DeityData?worshipsintrig@&nbsp;</TD>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Cleric Sins</B></TD><TD>@DeityData?clericsintrig@&nbsp;</TD>
+		-->
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Powers</B></TD>
+		<TD>
+		@AbilityPowersNext?reset@
+		@loop@
+		@AbilityPowersNext@
+		<a href="javascript:openUp2('@AbilityID@');"><FONT COLOR=PURPLE>@AbilityName@</FONT></a> <FONT COLOR=BLACK>/</FONT>
+		@back@
+		&nbsp;</TD>
+		</TR>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Cleric Power Ritual</B></TD><TD>@DeityData?powertrig@&nbsp;</TD>
+		<TR><TD WIDTH=25% BGCOLOR=#FFCCFF><B>Cleric Services</B></TD><TD>@DeityData?servicetrig@&nbsp;</TD>
+		</TABLE>
+		<P>
+		@back@
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+</body>
+</html>

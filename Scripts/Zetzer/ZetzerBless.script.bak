@@ -1,0 +1,51 @@
+FUNCTION_PROG BlessLookingPlayer
+	mpaffect bless $n
+	mpechoat $n You feel blessed
+	return cancel
+~
+
+
+
+FUNCTION_PROG BeefUpSpell
+	
+	wizemote all ^wZetzer calls upon all the power of light and goodness to grant a great blessing upon $9.
+	mpat $9 pray "holy aura" $9
+	mpat $9 cast blur $1
+	mpat $9 cast shield $1
+	mpat $9 cast "giant strength" $9
+	return cancel
+	
+~
+
+
+	
+FUNCTION_PROG CastBlessSpell
+	
+	wizemote all ^wZetzer calls forth the power of the heavens and a blessing falls upon $9.
+	mpat $9 pray bless $9
+	mpat $9 cast shield $9
+	return cancel
+~
+
+FUNCTION_PROG LookZetzerBless
+	if isname($n Xalan) 
+		mpechoat $n ^rStop lookin at me^?
+		return cancel
+	else
+		if affected($n, Prayer_Bless)
+			mpechoat $n You are already blessed.
+			mpechoat $n ^wYou look at Zetzer and are almost blinded. Shining light eminates from all around her and a calming wind blows through your body. Zetzer stands before you in one of her chosen shapes, and bows her head to you.
+			return cancel
+		else
+			mpechoaround $n $n takes a glance at Zetzer.
+			mpechoat $i $n looks at you for your blessing.
+			mpechoat $n ^wYou look at Zetzer and are almost blinded. Shining light eminates from all around her and a calming wind blows through your body. Zetzer stands before you in one of her chosen shapes, and bows her head to you.
+#			mpechoat $n Description: $%GSTAT(Zetzer DESCRIPTION)%
+			mpcallfunc BlessLookingPlayer
+		
+		endif
+	endif
+	
+return cancel
+
+	~

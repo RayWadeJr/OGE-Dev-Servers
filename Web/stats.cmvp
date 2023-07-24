@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+@if?!Authenticate@ <a href="/access.cmvp">Not authenticated</a> @else@
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<html>
+<head>
+	<META CHARSET="utf-8"/>
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css">
+	<title>Sancara</title>
+	<script language=JavaScript>
+	<!--
+		function Clicked(action)
+		{
+			document.RESOURCES.action=action;
+			document.RESOURCES.submit();
+		}
+		function openUp2(named)
+		{
+			var strFeatures="top=200,left=50,resizeable=no,scrollbars=yes,height=400,width=750,alwaysRaised=yes,dependent=yes";
+			w=window.open("ability.cmvp?ABILITY="+named,
+			            "Ability",strFeatures, false);
+		}
+	//-->
+	</script></head>
+
+<body>
+<div id="header">
+
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div class="top-nav">
+		<a href="index.cmvp">Home</a>
+		<a href="about.cmvp">About</a>
+		<a href="features.cmvp">Features</a>
+			  <div class="dropdown">
+				  <button class="dropbtn" onclick="myFunction()">Maps
+				    <i class="fa fa-caret-down"></i>
+				  </button>
+
+				  <div class="dropdown-content" id="map-list">
+				    <a href="world-map.cmvp">World Map</a>
+				    <a href="malessor-maps.cmvp">Malessor Maps</a>
+				    <a href="adran-maps.cmvp">Adran Maps</a>
+				    <a href="engor-maps.cmvp">Engor Maps</a>
+				  </div>
+
+			  </div>
+		<a href="scripts.cmvp">Scripts</a>
+		<a href="topplayers.cmvp">Leaderboards</a>
+			<div class="topnav-right">
+				<a href="access.cmvp">Login</a>
+				<a href="register.cmvp">Register</a>
+			</div>
+	</div>
+
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="access.cmvp">Player Portal</a></li>
+			<li><a href="areas.cmvp">Areas</a></li>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+		<FORM  ACCEPT-CHARSET="UTF-8" NAME=RESOURCES TARGET=_top METHOD=POST ACTION="player.cmvp">
+		<INPUT TYPE=HIDDEN NAME=AUTH VALUE="@Authenticate?AUTH@">
+		@if?CheckReqParm?PLAYER=@
+		<INPUT TYPE=HIDDEN NAME=AUTHPLAYER VALUE="@Authenticate?SETPLAYER@">
+		@endif@
+		@if?IsAccountSystem@
+		<INPUT TYPE=HIDDEN NAME=AUTHACCOUNT VALUE="@Authenticate?SETACCOUNT@">
+		<CENTER> Character: 
+		@AddRequestParameter?OLDPLAYER=@@RequestParameter?PLAYER@@ @
+		<SELECT NAME=PLAYER ONCHANGE="Clicked('stats.cmvp');">
+		@AccountPlayerNext?RESET@
+		@loop@
+		@AccountPlayerNext@
+		<OPTION VALUE="@RequestParameter?PLAYER@"  @if?CheckReqParm?PLAYER=@@RequestParameter?OLDPLAYER@@ @SELECTED@endif@ >@RequestParameter?PLAYER@
+		@back@
+		@AddRequestParameter?PLAYER=@@RequestParameter?OLDPLAYER@@ @
+		</SELECT>
+		@AddRequestParameter?OLDPLAYER=@@RequestParameter?PLAYER@@ @
+		@else@
+		    <INPUT TYPE=HIDDEN NAME=PLAYER VALUE="@PlayerData?NAME">
+		@endif@
+		<INPUT TYPE=HIDDEN NAME=FUNCTION VALUE="">
+			<TABLE WIDTH=100% BORDER=0>
+			<TD WIDTH=80%><BR></TD>
+			<TD WIDTH=20% ALIGN=CENTER>
+			<INPUT TYPE=BUTTON NAME=BACK VALUE="Back" ONCLICK="Clicked('access.cmvp');">
+			</TD>
+			</TR>
+			</TABLE>
+		@if?PlayerData?ACCTEXPUSED@<CENTER><FONT COLOR=BLACK>Account expires: </FONT><FONT COLOR=GREEN>@PlayerData?ACCTEXP@</FONT></CENTER>@endif@
+		<br><TABLE WIDTH=100% BORDER=1 CELLSPACING=0 CELLPADDING=0>
+		<TR>
+			<TD WIDTH=40%>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+			<TR>
+				<TD WIDTH=33%><FONT COLOR=BLACK>Name: </FONT></TD>
+				<TD WIDTH=66%><FONT COLOR=GREEN><B>@PlayerData?NAME@</B></FONT>@if?PlayerOnline?=true@<FONT COLOR=BLACK>&nbsp;&nbsp;&nbsp; *ONLINE*</FONT>@endif@</TD>
+			</TR>
+			</TABLE>
+			</TD>
+			<TD WIDTH=40%><FONT COLOR=BLACK>Race: </FONT><FONT COLOR=GREEN>@PlayerData?GENDERNAME@ @PlayerData?RACENAME@</FONT></TD>
+			<TD WIDTH=20% VALIGN=CENTER ALIGN=CENTER ROWSPAN=3>
+			@if?PlayerData?HASIMG@
+			<IMG HEIGHT=140 WIDTH=70 SRC="@PlayerData?IMGURL@">
+			@endif@
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=80% COLSPAN=2>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Description: </FONT></TD>
+				<TD WIDTH=80%><FONT COLOR=GREEN><B>@PlayerData?DESCRIPTION@</B></FONT></TD>
+			</TR>
+			</TABLE>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=80% COLSPAN=2>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Level: </FONT>&nbsp;&nbsp;<FONT COLOR=GREEN>@PlayerData?LEVEL@</FONT></TD>
+				<TD WIDTH=80%><FONT COLOR=BLACK>Classes: </FONT><FONT COLOR=GREEN>@PlayerData?CLASSES@</FONT></TD>
+			</TR>
+			</TABLE>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=3>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Hit Points: </FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=GREEN>@PlayerData?HITPOINTS@</FONT><FONT COLOR=BLACK>/</FONT><FONT COLOR=GREEN>@PlayerData?BASEHITPOINTS@</FONT></TD>
+				@if?IsDisabled?ATTRIBS@ <TD WIDTH=42 COLSPAN=6>&nbsp;</TD>@else@
+				<TD WIDTH=20% ALIGN=RIGHT><FONT COLOR=BLACK>Stats:&nbsp;&nbsp;&nbsp;</FONT></TD>
+				<TD WIDTH=7% ALIGN=LEFT><FONT COLOR=BLACK>Str</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?STRENGTH@</FONT></TD>
+				<TD WIDTH=7% ALIGN=LEFT><FONT COLOR=BLACK>Int</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?INTELLIGENCE@</FONT></TD>
+				<TD WIDTH=7% ALIGN=LEFT><FONT COLOR=BLACK>Dex</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?DEXTERITY@</FONT></TD>
+				@endif@
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Mana: </FONT></TD>
+				<TD WIDTH=40% COLSPAN=2><FONT COLOR=GREEN>@PlayerData?MANA@</FONT><FONT COLOR=BLACK>/</FONT><FONT COLOR=GREEN>@PlayerData?BASEMANA@</FONT></TD>
+				@if?IsDisabled?ATTRIBS@ <TD WIDTH=42 COLSPAN=6>&nbsp;</TD>@else@
+				<TD WIDTH=7% ALIGN=LEFT><FONT COLOR=BLACK>Wis</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?WISDOM@</FONT></TD>
+				<TD WIDTH=7% ALIGN=LEFT><FONT COLOR=BLACK>Con</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?CONSTITUTION@</FONT></TD>
+				<TD WIDTH=7% ALIGN=LEFT><FONT COLOR=BLACK>Chr</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?CHARISMA@</FONT></TD>
+				@endif@
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Movement: </FONT></TD>
+				<TD WIDTH=80% COLSPAN=8><FONT COLOR=GREEN>@PlayerData?MOVEMENT@</FONT><FONT COLOR=BLACK>/</FONT><FONT COLOR=GREEN>@PlayerData?BASEMOVEMENT@</FONT></TD>
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Alignment: </FONT></TD>
+				<TD WIDTH=80% COLSPAN=8><FONT COLOR=GREEN>@PlayerData?ALIGNMENTSTRING@ (@PlayerData?ALIGNMENTNAME@)</FONT></TD>
+			</TR>
+			</TABLE>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=3>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Height: </FONT></TD>
+				<TD WIDTH=40%><FONT COLOR=GREEN>@PlayerData?HEIGHT@</FONT> <FONT COLOR=BLACK>inches tall</FONT></TD>
+				<TD WIDTH=40% COLSPAN=2><FONT COLOR=BLACK>Riding: </FONT> <FONT COLOR=GREEN>@PlayerData?RIDING@</FONT></TD>
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Weight: </FONT></TD>
+				<TD WIDTH=40%><FONT COLOR=GREEN>@PlayerData?WEIGHT@</FONT> <FONT COLOR=BLACK>pounds</FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Practice Sessions: </FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=GREEN>@PlayerData?PRACTICES@</FONT></TD>
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Carrying: </FONT></TD>
+				<TD WIDTH=40%><FONT COLOR=GREEN>@PlayerData?ENCUMBRANCE@</FONT><FONT COLOR=BLACK>/</FONT><FONT COLOR=GREEN>@PlayerData?MAXCARRY@</FONT><FONT COLOR=BLACK> pounds</FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Training Sessions: </FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=GREEN>@PlayerData?TRAINS@</FONT></TD>
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Age: </FONT></TD>
+				<TD WIDTH=40%><FONT COLOR=GREEN>@PlayerData?HOURS@</FONT><FONT COLOR=BLACK> hours online</FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Total Experience: </FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=GREEN>@PlayerData?EXPERIENCE@</FONT></TD>
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Gold: </FONT></TD>
+				<TD WIDTH=40%><FONT COLOR=GREEN>@PlayerData?MONEY@</FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Exp. To Level: </FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=GREEN>@PlayerData?EXPERIENCELEVEL@</FONT></TD>
+			</TR>
+			</TABLE>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=3>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Combat Info: </FONT></TD>
+				<TD WIDTH=20%><BR></TD>
+				@if?!CheckAuthCode?AUTH_STAT=true&AUTH_CMDPLAYERS=true@
+				<TD WIDTH=60% COLSPAN=7><BR></TD>
+				@else@
+				<TD WIDTH=20% ALIGN=RIGHT><FONT COLOR=BLACK>Save Vs:&nbsp;&nbsp;&nbsp;</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Fire</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?FIRE@</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Cold</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?COLD@</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Water</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?WATER@</FONT></TD>
+				@endif@
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Attack: </FONT></TD>
+				<TD WIDTH=40% COLSPAN=2>
+					<FONT COLOR=GREEN>@PlayerData?ATTACKNAME@</FONT>
+					<FONT COLOR=BLACK><B>&nbsp;X&nbsp;</B>
+					<FONT COLOR=GREEN>@PlayerData?SPEEDNAME@</FONT>
+				@if?!CheckAuthCode?AUTH_STAT=true&AUTH_CMDPLAYERS=true@
+				<TD WIDTH=40% COLSPAN=6>
+					<FONT COLOR=BLACK>Defence: </FONT>
+					<FONT COLOR=GREEN>@PlayerData?ARMORNAME@</FONT>
+					<FONT COLOR=BLACK>/ Wimpy: </FONT><FONT COLOR=GREEN>@PlayerData?WIMP@</FONT>
+				</TD>
+				@else@
+				<TD WIDTH=7%><FONT COLOR=BLACK>Para</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?PARALYSIS@</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Dise</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?DISEASE@</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Magic</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?MAGIC@</FONT></TD>
+				@endif@
+			</TR>
+			@if?!CheckAuthCode?AUTH_STAT=true&AUTH_CMDPLAYERS=true@
+			@else@
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Damage: </FONT></TD>
+				<TD WIDTH=40% COLSPAN=2><FONT COLOR=GREEN>@PlayerData?DAMAGENAME@</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Pois</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?POISON@</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Acid</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?ACID@</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Gas</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?GAS@</FONT></TD>
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Defence: </FONT></TD>
+				<TD WIDTH=40% COLSPAN=2>
+					<FONT COLOR=GREEN>@PlayerData?ARMORNAME@</FONT>
+					<FONT COLOR=BLACK>/ Wimpy: </FONT><FONT COLOR=GREEN>@PlayerData?WIMP@</FONT>
+				</TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Dead</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?UNDEAD@</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Elec</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?ELECTRICITY@</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=BLACK>Mind</FONT></TD>
+				<TD WIDTH=7%><FONT COLOR=GREEN>@PlayerData?MIND@</FONT></TD>
+			</TR>
+			@endif@
+			</TABLE>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=3>
+			<TABLE WIDTH=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Location: </FONT></TD>
+				<TD WIDTH=40%><FONT COLOR=GREEN>@PlayerData?LOCATION@</FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Liege: </FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=GREEN>@PlayerData?LIEGE@</FONT></TD>
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Start Room: </FONT></TD>
+				<TD WIDTH=40%><FONT COLOR=GREEN>@PlayerData?STARTROOM@</FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Clan: </FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=GREEN>@PlayerData?CLANNAMES@</FONT></TD>
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Email: </FONT></TD>
+				<TD WIDTH=40%><FONT COLOR=GREEN>@PlayerData?EMAIL@</FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Deity: </FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=GREEN>@PlayerData?DEITYNAME@</FONT></TD>
+			</TR>
+			<TR>
+				<TD WIDTH=20%><FONT COLOR=BLACK>LastIP: </FONT></TD>
+				<TD WIDTH=40%><FONT COLOR=GREEN>@PlayerData?LASTIP@</FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=BLACK>Quest Points: </FONT></TD>
+				<TD WIDTH=20%><FONT COLOR=GREEN>@PlayerData?QUESTPOINTS@</FONT></TD>
+			</TR>
+			</TABLE>
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=100% COLSPAN=3><FONT COLOR=BLACK>Factions: </FONT><FONT COLOR=GREEN>@PlayerData?FACTIONNAMES@</FONT></TD>
+		</TR>
+		<TR>
+			<TD WIDTH=100% COLSPAN=3><FONT COLOR=BLACK>Equipment: </FONT><FONT COLOR=GREEN>@PlayerData?INVENTORY@</FONT></TD>
+		</TR>
+		<TR>
+			<TD WIDTH=100% COLSPAN=3><FONT COLOR=BLACK>Achievements: </FONT>@AchievementNext?reset@ 
+			@loop@ @AchievementNext@ @if?AchievementData?ISPLAYERACHIEVED@<FONT COLOR=GREEN>@AchievementData?DISPLAY@</FONT> <FONT COLOR=GREEN>/</FONT>@endif@ @back@
+			<BR><FONT COLOR=BLACK>Achievement Progress: </FONT>@AchievementNext?reset@
+			@loop@ @AchievementNext@ @if?!AchievementData?ISPLAYERACHIEVED@ @if?AchievementData?ISPLAYERPROGRESS@<FONT COLOR=GREEN>@AchievementData?DISPLAY@ (@AchievementData?PLAYERPROGRESS@/@AchievementData?COUNT@)</FONT> <FONT COLOR=GREEN>/</FONT>@endif@ @endif@ @back@
+			</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=100% COLSPAN=3><FONT COLOR=BLACK>Abilities: </FONT>@AbilityPlayerNext?reset@ @loop@ @AbilityPlayerNext@ <a href="javascript:openUp2('@AbilityID@');"><FONT COLOR=GREEN>@AbilityName@</FONT></a> <FONT COLOR=GREEN>/</FONT> @back@</TD>
+		</TR>
+		<TR>
+			<TD WIDTH=100% COLSPAN=3><FONT COLOR=BLACK>Expertises: </FONT><FONT COLOR=GREEN>@PlayerData?EXPERTISE@</FONT></TD>
+		</TR>
+		</TABLE>
+		</FORM>
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+</body>
+</html>
+@endif@

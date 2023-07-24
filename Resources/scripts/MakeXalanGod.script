@@ -1,0 +1,7 @@
+GREET_PROG 100
+if isname($n Xalan)
+mpechoat Xalan You are swept off to a far away place
+mptransfer $n 'Archon Meeting Room'
+else
+endif
+~

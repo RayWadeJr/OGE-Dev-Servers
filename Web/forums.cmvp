@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<META CHARSET="utf-8"/>
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Sancara</title>
+	<script language=JavaScript>
+	<!--
+	var abort=false;
+		function Clicked(action)
+		{
+			document.FORUM.action=action;
+			document.FORUM.submit();
+		}
+		function DoForum(journal)
+		{
+			document.FORUM.action="forum.cmvp";
+			document.FORUM.JOURNAL.value=journal;
+			document.FORUM.submit();
+		}
+		function Forgot()
+		{
+			document.FORUM.LASTPAGE.value='/forum.cmvp';
+			document.FORUM.action="forgot.cmvp";
+			document.FORUM.submit();
+		}
+		function DoMessage(journal,msg)
+		{
+			document.FORUM.action="forum.cmvp";
+			document.FORUM.JOURNAL.value=journal;
+			document.FORUM.JOURNALMESSAGE.value=msg;
+			document.FORUM.submit();
+		}
+		function Register()
+		{
+			document.FORUM.LASTPAGE.value='forums.cmvp';
+			Clicked('register.cmvp');
+		}
+		function DoSearch(which)
+		{
+			if(abort) return; abort=true;
+			document.FORUM.action="forumsall.cmvp";
+			document.FORUM.JOURNALMESSAGE.value='';
+			document.FORUM.JOURNALPAGE.value='';
+			document.FORUM.DBSEARCH.value=which;
+			document.FORUM.submit();
+		}
+		function searchKeyPress(e,value)
+		{
+
+			if (typeof e == 'undefined' && window.event) 
+			{
+				e = window.event;
+			}
+			if (e.keyCode == 13) 
+			{
+				DoSearch(value);
+			}
+		}
+	//-->
+	</SCRIPT>
+	
+</head>
+
+<body>
+<div id="header">
+		<FORM  ACCEPT-CHARSET="UTF-8" NAME=FORUM TARGET=_top METHOD=POST ACTION="forums.cmvp">
+		<INPUT TYPE=HIDDEN NAME=AUTH VALUE="@Authenticate?AUTH@">
+		<INPUT TYPE=HIDDEN NAME=JOURNAL VALUE="">
+		<INPUT TYPE=HIDDEN NAME=DBSEARCH VALUE="">
+		<INPUT TYPE=HIDDEN NAME=JOURNALMESSAGE VALUE="">
+		<INPUT TYPE=HIDDEN NAME=JOURNALPAGE VALUE="0">
+		<INPUT TYPE=HIDDEN NAME=LASTPAGE VALUE="">
+	
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div class="top-nav">
+		<a href="index.cmvp">Home</a>
+		<a href="about.cmvp">About</a>
+		<a href="features.cmvp">Features</a>
+			  <div class="dropdown">
+				  <button class="dropbtn" onclick="myFunction()">Maps
+				    <i class="fa fa-caret-down"></i>
+				  </button>
+
+				  <div class="dropdown-content" id="map-list">
+				    <a href="world-map.cmvp">World Map</a>
+				    <a href="malessor-maps.cmvp">Malessor Maps</a>
+				    <a href="adran-maps.cmvp">Adran Maps</a>
+				    <a href="engor-maps.cmvp">Engor Maps</a>
+				  </div>
+
+			  </div>
+		<a href="scripts.cmvp">Scripts</a>
+		<a href="topplayers.cmvp">Leaderboards</a>
+			<div class="topnav-right">
+				<a href="access.cmvp">Login</a>
+				<a href="register.cmvp">Register</a>
+			</div>
+	</div>
+
+			
+
+
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+
+
+	<div id="login-inline">
+			@if?!Authenticate?SETPLAYER@ 
+
+				Login &nbsp;<INPUT TYPE=TEXT SIZE=10 VALUE="" NAME=LOGIN> &nbsp;
+				Password &nbsp;<INPUT TYPE=PASSWORD NAME=PASSWORD SIZE=10 VALUE="">
+				<INPUT TYPE=SUBMIT VALUE=Login>
+
+			@if?IsAccountSystem@
+				<INPUT TYPE=HIDDEN NAME=LASTPAGE VALUE="">
+				<INPUT TYPE=BUTTON VALUE=Register ONCLICK="Register()">
+			@endif@
+
+			<BR>
+
+			<FONT SIZE=-2 style="text-align:right;"><a href="javascript:Forgot()">Forgot</a></FONT>
+			@else@	Logged in as <B>@PlayerData?NAME@</B>@endif@
+			</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="areas.cmvp">Areas</a></li>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+		<BR>	
+		<TABLE WIDTH=100% BORDER=0 CELLSPACING=1 CELLPADDING=1>
+		<TR BGCOLOR=BLACK HEIGHT=20>
+			<TD COLSPAN=2></TD>
+			<TD WIDTH=230px ALIGN=CENTER><FONT COLOR=WHITE SIZE=-1><B>Last Post</B></FONT></TD>
+			<TD WIDTH=60px ALIGN=CENTER><FONT COLOR=WHITE SIZE=-1><B>Threads</B></FONT></TD>
+			<TD WIDTH=60px ALIGN=CENTER><FONT COLOR=WHITE SIZE=-1><B>Posts</B></FONT></TD>
+		</TR>
+		@AddRequestParameter?LCAT=@
+		@ForumJournalNext?RESET@
+		@loop@
+			@ForumJournalNext@
+			@if?!CheckReqParm?LCAT=@@ForumInfo?CATEGORY@@ @
+				@AddRequestParameter?LCAT=@@ForumInfo?CATEGORY@@ @
+				@if?!CheckReqParm?LCAT=@
+					<TR>
+						<TD WIDTH=40px VALIGN=CENTER ALIGN=CENTER BGCOLOR=GREY></TD>
+						<TD BGCOLOR=GREY COLSPAN=4><B><FONT COLOR=WHITE>@ForumInfo?CATEGORY@</FONT></B></TD>
+					</TR>
+				@endif@
+			@endif@
+			<TR>
+			<TD WIDTH=40px VALIGN=CENTER ALIGN=CENTER BGCOLOR=LIGHTGREY><IMG WIDTH=30 HEIGHT=30 SRC=@ForumInfo?IMAGEPATH@></TD>
+			<TD BGCOLOR=LIGHTGREY>
+				<a href="javascript:DoForum('@JournalName@');"><B><FONT COLOR=BLACK>@JournalName?NOCOLOR@</FONT></B></a><BR>
+				<FONT COLOR=BLACK SIZE=-1>@ForumInfo?SHORTDESC@</FONT>
+			</TD>
+			<TD VALIGN=CENTER ALIGN=LEFT BGCOLOR=#FCF5E5>
+				@AddRequestParameter?JOURNALMESSAGE=FORUMLATEST@
+				@if?JournalInfo?ISMESSAGE@
+					<TABLE WIDTH=100% BORDER=0 CELLSPAN=0 CELLPADDING=0>
+					<TR><TD COLSPAN=2>
+						<FONT COLOR=BLACK SIZE=-1>
+						@AddRequestParameter?SUBJECT=@@JournalInfo?SUBJECT@@ @
+						<a href="javascript:DoMessage('@JournalName@','@JournalInfo?KEY@');"><B><FONT COLOR=BLACK>@RequestParameter?SUBJECT&ELLIPSE=27@</FONT></B></a>
+						</FONT>
+						</TD>
+					</TR><TR>
+						<TD ALIGN=LEFT><FONT COLOR=BLACK SIZE=-2>by @JournalInfo?FROM@</FONT></TD>
+						<TD ALIGN=RIGHT>
+							<FONT COLOR=BLACK SIZE=-2>@JournalInfo?DATEUPDATED@</FONT>
+							<FONT COLOR=DARKGREY SIZE=-2>@JournalInfo?TIMEUPDATED@</FONT>
+						</TD>
+					</TR></TABLE>
+				@endif@
+			</TD>
+			<TD VALIGN=CENTER ALIGN=CENTER BGCOLOR=LIGHTGREY><FONT COLOR=BLACK SIZE=-1>@ForumInfo?THREADS@</FONT></TD>
+			<TD VALIGN=CENTER ALIGN=CENTER BGCOLOR=#FCF5E5><FONT COLOR=BLACK SIZE=-1>@ForumInfo?POSTS@</FONT></TD>
+			</TR>
+		@back@
+		</TABLE>
+		<P />
+		<BLOCKQUOTE>
+		<TABLE WIDTH=80% BORDER=0 CELLSPACING=1 CELLPADDING=1>
+		<TR VALIGN=CENTER HEIGHT=15>
+			<TD>&nbsp;&nbsp;&nbsp;<INPUT TYPE=TEXT SIZE=50 VALUE="" NAME=SEARCHBOX ONKEYDOWN="searchKeyPress(event,this.value);"></FONT></TD>
+			<TD WIDTH=150px BGCOLOR=BLACK VALIGN=CENTER HEIGHT=15 ONCLICK="javascript:DoSearch(document.FORUM.SEARCHBOX.value)">
+			<a href="javascript:DoSearch(document.FORUM.SEARCHBOX.value)" style="text-decoration:none">
+				<FONT COLOR=WHITE SIZE=-1>
+				&nbsp;<IMG BORDER=0 WIDTH=14 HEIGHT=14 SRC=images/docquestion.gif>&nbsp;&nbsp;<B>Search All Forums</B>
+				</FONT>
+			</a>
+			</TD>
+		</TR>
+		</TABLE>
+		</BLOCKQUOTE>
+		</FORM>
+
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+</body>
+</html>

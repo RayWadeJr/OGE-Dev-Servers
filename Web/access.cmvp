@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<META CHARSET="utf-8"/>
+	<link rel="coffeemud icon" href="images/coffeemud.ico" >
+	<link rel="STYLESHEET" TYPE="TEXT/CSS" HREF="index.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Sancara</title>
+
+		<script language=JavaScript>
+	<!--
+		function Clicked(action)
+		{
+			document.ACCESS.action=action;
+			document.ACCESS.submit();
+		}
+		function ClickedClan(clanname,action)
+		{
+			document.ACCESS.CLAN.value=clanname;
+			document.ACCESS.action=action;
+			document.ACCESS.submit();
+		}
+		function Register()
+		{
+			document.ACCESS.LASTPAGE.value='/access.cmvp';
+			Clicked('register.cmvp');
+		}
+		
+		function Forgot()
+		{
+			document.ACCESS.LASTPAGE.value='/access.cmvp';
+			Clicked('forgot.cmvp');
+		}
+	//-->
+	</SCRIPT>
+
+</head>
+
+<body>
+<div id="header">
+	
+	<div id="title"><h1>Sancara</h1></div>
+
+	<div class="top-nav">
+		<a href="index.cmvp">Home</a>
+		<a href="about.cmvp">About</a>
+		<a href="features.cmvp">Features</a>
+			  <div class="dropdown">
+				  <button class="dropbtn" onclick="myFunction()">Maps
+				    <i class="fa fa-caret-down"></i>
+				  </button>
+
+				  <div class="dropdown-content" id="map-list">
+				    <a href="world-map.cmvp">World Map</a>
+				    <a href="malessor-maps.cmvp">Malessor Maps</a>
+				    <a href="adran-maps.cmvp">Adran Maps</a>
+				    <a href="engor-maps.cmvp">Engor Maps</a>
+				  </div>
+
+			  </div>
+		<a href="scripts.cmvp">Scripts</a>
+		<a href="topplayers.cmvp">Leaderboards</a>
+			<div class="topnav-right">
+				<a class="active" href="access.cmvp">Login</a>
+				<a href="register.cmvp">Register</a>
+			</div>
+	</div>
+
+	<div id="play-web">
+		<a href="siplet/index.cmvp" target="_blank"><img src="images/play-now-button.png"></img><br>Browser</a>(IE/CH/FF)<span id="play-telnet"><a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">(Others)</a></span>
+		<NOSCRIPT>
+		<a href="telnet://@MudInfo?DOMAIN@:@MudInfo?PORT@">Play NOW!</a>
+		</NOSCRIPT>
+	</div>
+</div>
+
+<div id="main-content">	
+	<div id="left-column">
+		<div id="server-status">
+			Server status: <a href="gamestatus.cmvp">@MUDSERVERSTATUS@</a><BR>
+			Connection: @MudInfo?DOMAIN@:@MudInfo?PORT@ <br>
+		</div>
+		<div id="left-nav">
+			<ul>
+			<li><a href="areas.cmvp">Areas</a></li>
+			<li><a href="races.cmvp">Races</a></li>
+			<li><a href="ables.cmvp">Abilities </a>(1600+)</li>
+			<li><a href="class-list.cmvp">Classes</a></li>
+			<li><a href="clans.cmvp">Clans</a></li>
+			<li><a href="deities.cmvp">Deities</a></li>
+			<li><a href="socials.cmvp">Socials </a>(700+)</li>
+			<li><a href="helps.cmvp?FIRSTLETTER=A">Help Topics</a></li>
+			<li><a href="forums.cmvp">Forums</a></li>
+			</ul>
+		</div>
+		<div id="discord-display">
+			<iframe src="https://discord.com/widget?id=1123295421180153927&theme=dark" width="200" height="400" style="position:absolute;top:280px;" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</div>
+	</div>
+
+	<div id="main-column">
+
+	@if?!Authenticate@ 
+		<CENTER>
+		<h2>Player Access Login</H2>
+		<br>
+		<br><INPUT TYPE=HIDDEN NAME=LASTPAGE VALUE="">
+		<FORM  ACCEPT-CHARSET="UTF-8" NAME=ACCESS METHOD=POST ACTION=access.cmvp TARGET=_top>
+		@if?IsAccountSystem@
+			Please enter one of your Sancara characters and your Account password to gain access.<BR>
+			If you do not have an account or any characters, click the Back link above and select Play NOW!<P>
+	    @else@
+			Please login as your Sancara player to gain access.<BR>
+			If you do not have a player account, click the Back link above and select Play NOW!<P>
+	    @endif@
+		<TABLE WIDTH=200 BORDER=1>
+		<TR><TD WIDTH=200 COLSPAN=2 ALIGN=CENTER BGCOLOR=WHITE><FONT COLOR=BLACK><B>Player Login</B></FONT></TD></TR>
+		<TR><TD WIDTH=50><FONT COLOR=BLACK>Login:</FONT></TD><TD WIDTH=150><INPUT TYPE=TEXT SIZE=10 NAME=LOGIN></TD></TR>
+		<TR><TD WIDTH=50><FONT COLOR=BLACK>Password:</FONT></TD><TD WIDTH=150><INPUT TYPE=PASSWORD SIZE=15 NAME=PASSWORD></TD></TR>
+		<TR><TD COLSPAN=2 WIDTH=200 ALIGN=CENTER>
+			<FORM  ACCEPT-CHARSET="UTF-8" NAME=ACCESS METHOD=POST ACTION=/access.cmvp TARGET=_top>
+			<INPUT TYPE=SUBMIT NAME=LOGINBUTTON VALUE=Login>
+			@if?IsAccountSystem@
+				<INPUT TYPE=HIDDEN NAME=LASTPAGE VALUE="">
+				<INPUT TYPE=BUTTON VALUE=Register ONCLICK="Register()">
+			@endif@
+			</FORM>
+		</TD></TR>
+		</TABLE>
+		@if?MudInfo?REALEMAILOK@
+		<BR><BR>
+		<a href="javascript:Forgot()"><FONT SIZE=-1 COLOR=BLUE>I forgot my account name or password.</FONT></A>
+		@endif@
+		</CENTER>
+		</FORM>
+	@else@
+		<FORM  ACCEPT-CHARSET="UTF-8" NAME=ACCESS METHOD=POST ACTION=/access.cmvp TARGET=_top>
+		<INPUT TYPE=HIDDEN NAME=AUTH VALUE="@Authenticate?AUTH@">
+		<INPUT TYPE=HIDDEN NAME=AUTHPLAYER VALUE="@Authenticate?SETPLAYER@">
+		<INPUT TYPE=HIDDEN NAME=PLAYER VALUE="@PlayerData?NAME@">
+		<INPUT TYPE=HIDDEN NAME=CLAN VALUE="">
+<!--<IMG ALIGN=LEFT src="images/logo.gif">--><center>
+		<BR>
+		<TABLE WIDTH=80% BORDER=0><TR><TD ALIGN=CENTER><H1>Welcome @PlayerData?NAME@!</H1></TD></TR></TABLE>
+		<TABLE WIDTH=80% BORDER=0>
+		<TR><TD BGCOLOR=WHITE ALIGN=CENTER COLSPAN=2><FONT COLOR=BLACK SIZE=6><B>Menu:</B></FONT></TD></TR>
+		<TR><TD WIDTH=50 STYLE="padding:10px;" >&nbsp; @if?PlayerData?HASIMG@
+	<IMG HEIGHT=140 WIDTH=70 SRC="@PlayerData?IMGURL@">
+@endif@
+</TD><TD>
+			<A href="javascript:Clicked('stats.cmvp')"><FONT  SIZE=5 COLOR=BLUE><B>Player Statistics</B></FONT></a>
+			<BR>
+			<A href="javascript:Clicked('channels.cmvp')"><FONT SIZE=5 COLOR=BLUE><B>Channel Backlogs</B></FONT></a>
+			@if?MudInfo?EMAILOK@
+			<BR>
+			<A href="javascript:Clicked('email.cmvp')">
+			<FONT SIZE=5 COLOR=BLUE><B>Player Email</B></FONT></a>
+			@endif@
+			<BR>
+			<A href="javascript:Clicked('picture.cmvp')"><FONT SIZE=5 COLOR=BLUE><B>Character Portrait</B></FONT></a>
+			<BR>
+			<A href="javascript:Clicked('forums.cmvp')"><FONT SIZE=5 COLOR=BLUE><B>Forums</B></FONT></a>
+			@PlayerData?PLAYERCLANRESET@
+			@loop@
+				@PlayerData?PLAYERCLANNEXT@
+				<BR>@AddRequestParameter?CLANENC=@@ClanID@@ @
+				<A href="javascript:Clicked('/clan/@RequestParameterEncoded?CLANENC@/index.cmvp')"><FONT SIZE=5 COLOR=BLACK><B>@ClanID@</B></FONT></a>
+			@back@
+			<BR>
+			<!--<A href="javascript:Clicked('index.cmvp')"><FONT SIZE=5 COLOR=BLUE><B>Public Pages</B></FONT></a>-->
+
+		</TD></TR>
+		</TABLE>
+		</CENTER>
+		</FORM>
+	@endif@
+
+	<div id="copyright">
+		&copy; 2023 Online Gaming Experience <br> <a href="http://www.coffeemud.org">Coffeemud Codebase</a>
+	</div>
+	
+	</div>
+
+	<div id="right-column">
+
+		<div id="current-player-list"> 
+			# Players Online: @NUMPLAYERS@ <br>
+			<hr> @PLAYERLIST@ 
+		</div>
+	</div>
+</div>
+</body>
+</html>
