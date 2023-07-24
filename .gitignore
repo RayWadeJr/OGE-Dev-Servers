@@ -1,0 +1,13 @@
+# remove .DS_Store file from GitHub that MAC OS X creates
+
+# find and remove .DS_Store
+find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
+
+# create .gitignore file, if needed
+touch .gitignore
+echo .DS_Store > .gitignore
+
+# push changes to GitHub
+git add .gitignore
+git commit -m '.DS_Store removed'
+git push origin master
